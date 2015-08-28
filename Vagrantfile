@@ -24,9 +24,16 @@ Vagrant.configure(2) do |config|
 
   # Build image
   config.vm.provision "shell", inline: "docker build -t #{ENV['docker_user']}/mongodb /vagrant"
+  # config.vm.provision "shell", inline: "docker build -t #{ENV['docker_user']}/mongodb:2.8 -f Dockerfile-2_8 /vagrant"
 
+  # Tag built images
+  config.vm.provision "shell", inline: "docker tag #{ENV['docker_user']}/mongodb #{ENV['docker_user']}/mongodb:3.0"
+  config.vm.provision "shell", inline: "docker tag #{ENV['docker_user']}/mongodb #{ENV['docker_user']}/mongodb:3.0-stable"
+  
   # Publish image to dockerhub
   config.vm.provision "shell", inline: "docker push #{ENV['docker_user']}/mongodb"
+  config.vm.provision "shell", inline: "docker push #{ENV['docker_user']}/mongodb:3.0"
+  config.vm.provision "shell", inline: "docker push #{ENV['docker_user']}/mongodb:3.0-stable"
 
   config.vm.provider "virtualbox" do |v|
     v.customize ["modifyvm", :id, "--memory", "768"]
