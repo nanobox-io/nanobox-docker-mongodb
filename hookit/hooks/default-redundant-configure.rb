@@ -1,7 +1,7 @@
 
 include Hooky::Mongodb
 
-boxfile = converge( BOXFILE_DEFAULTS, payload[:boxfile] ) 
+boxfile = converge( BOXFILE_DEFAULTS, payload[:boxfile] )
 
 # set mongodb.conf
 template "/data/etc/mongodb/mongod.conf" do
