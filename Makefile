@@ -1,33 +1,30 @@
-all: image tag
+# -*- mode: make; tab-width: 4; -*-
+# vim: ts=4 sw=4 ft=make noet
+all: build publish
 
-image:
-	@vagrant up
-	@vagrant ssh -c "sudo docker build -t nanobox/mongodb /vagrant"
+LATEST:=3.0
+stability?=latest
+version?=$(LATEST)
+dockerfile?=Dockerfile-$(version)
 
-tag:
-	@vagrant ssh -c "sudo docker tag -f nanobox/mongodb nanobox/mongodb:3.0"
-	@vagrant ssh -c "sudo docker tag -f nanobox/mongodb nanobox/mongodb:3.0-stable"
-	@vagrant ssh -c "sudo docker tag -f nanobox/mongodb nanobox/mongodb:3.0-beta"
-	@vagrant ssh -c "sudo docker tag -f nanobox/mongodb nanobox/mongodb:3.0-alpha"
-	@vagrant ssh -c "sudo docker tag -f nanobox/mongodb nanobox/mongodb:stable"
-	@vagrant ssh -c "sudo docker tag -f nanobox/mongodb nanobox/mongodb:beta"
-	@vagrant ssh -c "sudo docker tag -f nanobox/mongodb nanobox/mongodb:alpha"
+login:
+	@vagrant ssh -c "docker login"
 
-publish: push_30_stable
+build:
+	@echo "Building 'mongodb' image..."
+	@vagrant ssh -c "docker build -f /vagrant/Dockerfile-${version} -t nanobox/mongodb /vagrant"
 
-push_30_stable: push_30_beta
-	@vagrant ssh -c "sudo docker push nanobox/mongodb"
-	@vagrant ssh -c "sudo docker push nanobox/mongodb:3.0"
-	@vagrant ssh -c "sudo docker push nanobox/mongodb:3.0-stable"
-	@vagrant ssh -c "sudo docker push nanobox/mongodb:stable"
-
-push_30_beta: push_30_alpha
-	@vagrant ssh -c "sudo docker push nanobox/mongodb:3.0-beta"
-	@vagrant ssh -c "sudo docker push nanobox/mongodb:beta"
-
-push_30_alpha:
-	@vagrant ssh -c "sudo docker push nanobox/mongodb:3.0-alpha"
-	@vagrant ssh -c "sudo docker push nanobox/mongodb:alpha"
+publish:
+	@echo "Tagging 'mongodb:${version}-${stability}' image..."
+	@vagrant ssh -c "docker tag -f nanobox/mongodb nanobox/mongodb:${version}-${stability}"
+	@echo "Publishing 'mongodb:${version}-${stability}'..."
+	@vagrant ssh -c "docker push nanobox/mongodb:${version}-${stability}"
+ifeq ($(version),$(LATEST))
+	@echo "Publishing 'mongodb:${stability}'..."
+	@vagrant ssh -c "docker tag -f nanobox/mongodb nanobox/mongodb:${stability}"
+	@vagrant ssh -c "docker push nanobox/mongodb:${stability}"
+endif
 
 clean:
-	@vagrant destroy -f
+	@echo "Removing all images..."
+	@vagrant ssh -c "for image in \$$(docker images -q); do docker rmi -f \$$image; done"
