@@ -11,7 +11,7 @@ execute 'chown /datas' do
 end
 
 # create log file
-file '/var/log/mongodb.log' do
+file '/data/var/log/mongodb/mongodb.log' do
   owner 'gonano'
   group 'gonano'
 end
@@ -23,11 +23,11 @@ end
 
 # set mongodb config
 template '/data/etc/mongod.conf' do
-  source 'mongodb.conf'
+  source 'mongodb.conf.erb'
   mode 0600
   owner 'gonano'
   group 'gonano'
-  variables ({ user: "nanobox" })
+  variables ({ boxfile: boxfile, user: "nanobox" })
 end
 
 # Import service (and start)
