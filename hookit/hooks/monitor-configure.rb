@@ -18,9 +18,9 @@ template "/data/etc/mongodb/mongodb.conf" do
   group 'gonano'
 end
 
-# chown datas for gonano
-execute "chown /datas" do
-  command 'chown -R gonano:gonano /datas'
+# chown data/var/db/mongodb for gonano
+execute "chown /data/var/db/mongodb" do
+  command 'chown -R gonano:gonano /data/var/db/mongodb'
 end
 
 directory '/var/log/mongodb' do

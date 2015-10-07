@@ -3,11 +3,13 @@ include Hooky::Mongodb
 # Setup
 boxfile = converge( BOXFILE_DEFAULTS, payload[:boxfile] )
 
-directory '/datas'
+directory '/data/var/db/mongodb' do
+  recursive true
+end
 
-# chown datas for gonano
-execute 'chown /datas' do
-  command 'chown -R gonano:gonano /datas'
+# chown data/var/db/mongodb for gonano
+execute 'chown /data/var/db/mongodb' do
+  command 'chown -R gonano:gonano /data/var/db/mongodb'
 end
 
 # create log file
