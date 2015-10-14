@@ -1,4 +1,4 @@
-## nanobox-docker-mongodb
+## nanobox-docker-mongodb ![Build Status Image](https://travis-ci.org/nanobox-io/nanobox-docker-mongodb.svg)
 
 This repo contains the files necessary to create the mongodb docker image for [Nanobox](http://nanobox.io) consumption.
 
