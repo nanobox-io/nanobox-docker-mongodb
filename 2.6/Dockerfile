@@ -13,11 +13,11 @@ RUN rm -rf /data/var/db/pkgin && \
     rm -rf /data/var/db/pkgin/cache
 
 # Install hooks
-RUN rm -rf /opt/gonano/var/db/pkgin && \
+RUN rm -rf /var/gonano/db/pkgin && \
     /opt/gonano/bin/pkgin -y up && \
     /opt/gonano/bin/pkgin -y in \
         hooks-mongodb && \
-    rm -rf /opt/gonano/var/db/pkgin/cache
+    rm -rf /var/gonano/db/pkgin/cache
 
 # Cleanup disk
 RUN rm -rf \
