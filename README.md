@@ -9,10 +9,6 @@ This repo contains the files necessary to create the mongodb docker image for [N
 
 ## Usage
 
-#### Pre-commit hook
-
-To install the pre-commit hook, run `ln -s ../../pre-commit.sh .git/hooks/pre-commit`
-
 #### Vagrant
 
 Before building docker containers, we must initialize the virtual machine with vagrant:

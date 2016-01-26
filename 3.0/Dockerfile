@@ -5,10 +5,6 @@ FROM nanobox/runit
 # Create directories
 RUN mkdir -p /var/log/gonano
 
-# Copy files
-ADD hookit/. /opt/gonano/hookit/mod/
-ADD files/. /
-
 # Install binaries
 RUN rm -rf /data/var/db/pkgin && \
     /data/bin/pkgin -y up && \
@@ -16,6 +12,13 @@ RUN rm -rf /data/var/db/pkgin && \
         mongodb-server-3.0 \
         mongodb30-tools-3.0 && \
     rm -rf /data/var/db/pkgin/cache
+
+# Install hooks
+RUN rm -rf /opt/gonano/var/db/pkgin && \
+    /opt/gonano/bin/pkgin -y up && \
+    /opt/gonano/bin/pkgin -y in \
+        hooks-mongodb && \
+    rm -rf /opt/gonano/var/db/pkgin/cache
 
 # Cleanup disk
 RUN rm -rf \
