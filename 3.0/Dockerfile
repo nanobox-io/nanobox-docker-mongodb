@@ -13,9 +13,18 @@ ADD files/. /
 RUN rm -rf /data/var/db/pkgin && \
     /data/bin/pkgin -y up && \
     /data/bin/pkgin -y in \
+        luvit-0.10.0 \
+        flip \
+        flip-scripts \
         mongodb-server-3.0 \
         mongodb30-tools-3.0 && \
     rm -rf /data/var/db/pkgin/cache
+
+RUN rm -rf /var/gonano/db/pkgin && \
+    /opt/gonano/bin/pkgin -y up && \
+    /opt/gonano/bin/pkgin -y in \
+        rsync && \
+    rm -rf /var/gonano/db/pkgin/cache
 
 # Cleanup disk
 RUN rm -rf \
@@ -24,4 +33,4 @@ RUN rm -rf \
         /var/tmp/*
 
 # Run runit automatically
-CMD /opt/gonano/bin/nanoinit
+CMD [ "/opt/gonano/bin/nanoinit" ]
