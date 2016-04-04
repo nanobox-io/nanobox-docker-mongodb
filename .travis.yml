@@ -8,8 +8,6 @@ services:
   - docker
 
 before_install:
-  - echo building $VERSION
-  - docker build -t nanobox/mongodb:$VERSION $VERSION
-  - docker tag -f nanobox/mongodb:$VERSION nanobox/mongodb:$VERSION-beta
+  - docker build -t nanobox/mongodb:$VERSION ./$VERSION
 
-script: sudo tests/run.sh $VERSION
+script: sudo test/run_all.sh $VERSION
