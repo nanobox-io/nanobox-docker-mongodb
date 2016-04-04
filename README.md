@@ -1,104 +1,128 @@
-## nanobox-docker-mongodb ![Build Status Image](https://travis-ci.org/nanobox-io/nanobox-docker-mongodb.svg)
+## MongoDB ![Build Status Image](https://travis-ci.org/nanobox-io/nanobox-docker-mongodb.svg)
 
-This repo contains the files necessary to create the mongodb docker image for [Nanobox](http://nanobox.io) consumption.
-
-#### Requirements
-
-* [vagrant](vagrantup.com)
-* [dockerhub](hub.docker.com) account
-
-## Usage
-
-#### Pre-commit hook
-
-To install the pre-commit hook, run `ln -s ../../pre-commit.sh .git/hooks/pre-commit`
-
-#### Vagrant
-
-Before building docker containers, we must initialize the virtual machine with vagrant:
-
-```bash
-vagrant up
-```
-
-#### Build
-
-To build the image:
-
-```bash
-make build
-```
-
-#### Publish
-
-To publish the image:
-
-```bash
-make publish
-```
-
-To publish the image tagged as alpha:
-
-```bash
-make publish stability=alpha
-```
-
-#### Combo
-
-To build and publish the image:
-
-```bash
-make
-```
-
-To build and publish the image tagged as alpha:
-
-```bash
-make stability=alpha
-```
-
-#### Cleaning
-
-To remove all images from the Vagrant machine:
-
-```bash
-make clean
-```
-
-## Testing
-
-All changes, experimental or not, should be published using the alpha tag. The alpha image can be tested by using [Nanobox](http://nanobox.io), and adding the following to an application's Boxfile:
+This is an MongoDB Docker image used to launch a MongoDB service on Nanobox. To use this image, add a data component to your `boxfile.yml` with the `nanobox/mongodb` image specified:
 
 ```yaml
-web1:
-  stability: alpha
+data:
+  image: nanobox/mongodb
 ```
 
-## Caveat
+## MongoDB Configuration Options
+MongoDB components are configured in your `boxfile.yml`. All available configuration options are outlined below.
 
-#### Authentication
+###### Quick Links
+[version](#version)  
+[objcheck](#objcheck)  
+[log\_verbosity](#log-verbosity)  
+[directoryperdb](#directoryperdb)  
+[logappend](#logappend)  
+[nojournal](#nojournal)  
+[noscripting](#noscripting)
 
-If during a publish, you receive the error:
-
-```bash
-unauthorized: access to the requested resource is not authorized
+#### Overview of MongoDB Boxfile Settings
+```yaml
+data:
+  image: nanobox/mongodb
+  config:
+    version: 3.0
+    objcheck: true
+    log_verbosity: 'v'
+    directoryperdb: true
+    logappend: true
+    nojournal: false
+    noscripting: false
 ```
 
-Run the following command and follow the login prompt:
+### Version
+When configuring a MongoDB service in your Boxfile, you can specify the version to use. The following version(s) are available:
 
-```bash
-make login
+- 2.6
+- 3.0
+
+**Note:** Due to version compatibility constraints, MongoDB versions cannot be changed after the service is created. To use a different version, you'll have to create a new MongoDB service and manually migrate data.
+
+#### version
+```yaml
+# default setting
+data:
+  image: nanobox/mongodb
+  config:
+    version: 3.0
 ```
 
-Subsequent publishes will use a stored api token.
+### ObjCheck
+View the [MongoDB documentation](http://docs.mongodb.org/manual/reference/configuration-options/#diaglog) for details and configuration options.
 
-#### Cleanup
-
-Don't forget to halt the Vagrant machine when you're done:
-
-```bash
-vagrant halt
+#### objcheck
+```yaml
+#default setting
+data:
+  image: nanobox/mongodb
+  config:
+    objcheck: true
 ```
+
+### Log Verbosity
+View the [MongoDB documentation](http://docs.mongodb.org/manual/reference/configuration-options/#verbose) for details and configuration options.
+
+#### log\_verbosity
+```yaml
+data:
+  image: nanobox/mongodb
+  config:
+    log_verbosity: 'v'
+```
+
+### DirectoryPerDB
+View the [MongoDB documentation](http://docs.mongodb.org/manual/reference/configuration-options/#directoryperdb) for details and configuration options.
+
+#### directoryperdb
+```yaml
+#default setting
+data:
+  image: nanobox/mongodb
+  config:
+    directoryperdb: true
+```
+
+### LogAppend
+View the [MongoDB documentation](http://docs.mongodb.org/manual/reference/configuration-options/#logappend) for details and configuration options.
+
+#### logappend
+```yaml
+#default setting
+data:
+  image: nanobox/mongodb
+  config:
+    logappend: true
+```
+
+### NoJournal
+View the [MongoDB documentation](http://docs.mongodb.org/manual/reference/configuration-options/#nojournal) for details and configuration options.
+
+#### nojournal
+```yaml
+#default setting
+data:
+  image: nanobox/mongodb
+  config:
+    nojournal: false
+```
+
+### NoScripting
+View the [MongoDB documentation](http://docs.mongodb.org/manual/reference/configuration-options/#noscripting) for details and configuration options.
+
+#### noscripting
+```yaml
+#default setting
+data:
+  image: nanobox/mongodb
+  config:
+    noscripting: false
+```
+
+## Help & Support
+This is a MongoDB Docker image provided by [Nanobox](http://nanobox.io). If you need help with this image, you can reach out to us in the [#nanobox IRC channel](http://webchat.freenode.net/?channels=nanobox). If you are running into an issue with the image, feel free to [create a new issue on this project](https://github.com/nanobox-io/nanobox-docker-mongodb/issues/new).
 
 ## License
 
