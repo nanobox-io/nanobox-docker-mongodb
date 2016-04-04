@@ -8,12 +8,12 @@ module Hooky
       after_deploy:                        {type: :array, of: :string, default: []},
 
       # mongodb settings
-      mongodb_objcheck:                    {type: :on_off, default: true},
-      mongodb_log_verbosity:               {type: :string, default: '', from: ['', 'v', 'vv', 'vvv', 'vvvv', 'vvvvv']},
-      monogdb_directoryperdb:              {type: :on_off, default: true},
-      mongodb_logappend:                   {type: :on_off, default: true},
-      mongodb_nojournal:                   {type: :on_off, default: false},
-      mongodb_noscripting:                 {type: :on_off, default: false}
+      objcheck:                    {type: :on_off, default: true},
+      log_verbosity:               {type: :string, default: '', from: ['', 'v', 'vv', 'vvv', 'vvvv', 'vvvvv']},
+      directoryperdb:              {type: :on_off, default: true},
+      logappend:                   {type: :on_off, default: true},
+      nojournal:                   {type: :on_off, default: false},
+      noscripting:                 {type: :on_off, default: false}
     }
 
   end
