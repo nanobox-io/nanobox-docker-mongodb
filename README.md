@@ -3,7 +3,7 @@
 This is an MongoDB Docker image used to launch a MongoDB service on Nanobox. To use this image, add a data component to your `boxfile.yml` with the `nanobox/mongodb` image specified:
 
 ```yaml
-data:
+data.db:
   image: nanobox/mongodb
 ```
 
@@ -21,7 +21,7 @@ MongoDB components are configured in your `boxfile.yml`. All available configura
 
 #### Overview of MongoDB Boxfile Settings
 ```yaml
-data:
+data.db:
   image: nanobox/mongodb
   config:
     version: 3.0
@@ -44,7 +44,7 @@ When configuring a MongoDB service in your Boxfile, you can specify the version 
 #### version
 ```yaml
 # default setting
-data:
+data.db:
   image: nanobox/mongodb
   config:
     version: 3.0
@@ -56,7 +56,7 @@ View the [MongoDB documentation](http://docs.mongodb.org/manual/reference/config
 #### objcheck
 ```yaml
 #default setting
-data:
+data.db:
   image: nanobox/mongodb
   config:
     objcheck: true
@@ -67,7 +67,7 @@ View the [MongoDB documentation](http://docs.mongodb.org/manual/reference/config
 
 #### log\_verbosity
 ```yaml
-data:
+data.db:
   image: nanobox/mongodb
   config:
     log_verbosity: 'v'
@@ -79,7 +79,7 @@ View the [MongoDB documentation](http://docs.mongodb.org/manual/reference/config
 #### directoryperdb
 ```yaml
 #default setting
-data:
+data.db:
   image: nanobox/mongodb
   config:
     directoryperdb: true
@@ -91,7 +91,7 @@ View the [MongoDB documentation](http://docs.mongodb.org/manual/reference/config
 #### logappend
 ```yaml
 #default setting
-data:
+data.db:
   image: nanobox/mongodb
   config:
     logappend: true
@@ -103,7 +103,7 @@ View the [MongoDB documentation](http://docs.mongodb.org/manual/reference/config
 #### nojournal
 ```yaml
 #default setting
-data:
+data.db:
   image: nanobox/mongodb
   config:
     nojournal: false
@@ -115,7 +115,7 @@ View the [MongoDB documentation](http://docs.mongodb.org/manual/reference/config
 #### noscripting
 ```yaml
 #default setting
-data:
+data.db:
   image: nanobox/mongodb
   config:
     noscripting: false
