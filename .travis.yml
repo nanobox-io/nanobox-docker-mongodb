@@ -15,7 +15,7 @@ script: sudo test/run_all.sh $VERSION
 after_success:
   - export BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
   - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-  - docker build -t ${NAMESPACE}/mongodb ./${VERSION}
+  - docker build -t ${NAMESPACE}/mongodb ./${VERSION};
   - docker tag ${NAMESPACE}/mongodb ${NAMESPACE}/mongodb:${VERSION}-beta;
   - docker push ${REMOTE}${NAMESPACE}/mongodb:${VERSION}-beta;
   - if [ "$VERSION" == "3.0" ]; then
@@ -25,7 +25,7 @@ after_success:
   - if [ "$BRANCH" == "master" ]; then
     if [ "$VERSION" == "3.0" ]; then
     docker push ${REMOTE}${NAMESPACE}/mongodb;
-    fi
+    fi;
     docker tag ${NAMESPACE}/mongodb ${NAMESPACE}/mongodb:${VERSION};
     docker push ${REMOTE}${NAMESPACE}/mongodb:${VERSION};
     else
