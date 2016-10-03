@@ -1,4 +1,4 @@
-## MongoDB ![Build Status Image](https://travis-ci.org/nanobox-io/nanobox-docker-mongodb.svg)
+## MongoDB [![Build Status Image](https://travis-ci.org/nanobox-io/nanobox-docker-mongodb.svg)](https://travis-ci.org/nanobox-io/nanobox-docker-mongodb)
 
 This is an MongoDB Docker image used to launch a MongoDB service on Nanobox. To use this image, add a data component to your `boxfile.yml` with the `nanobox/mongodb` image specified:
 
