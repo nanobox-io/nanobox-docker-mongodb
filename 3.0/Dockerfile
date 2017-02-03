@@ -11,6 +11,8 @@ RUN apt-get update -qq && \
     apt-get clean all && \
     rm -rf /var/lib/apt/lists/*
 
+USER gonano
+
 # Install binaries
 RUN rm -rf /data/var/db/pkgin && \
     /data/bin/pkgin -y up && \
@@ -21,6 +23,8 @@ RUN rm -rf /data/var/db/pkgin && \
         mongodb-server-3.0 \
         mongodb30-tools-3.0 && \
     rm -rf /data/var/db/pkgin/cache
+
+USER root
 
 RUN rm -rf /var/gonano/db/pkgin && \
     /opt/gonano/bin/pkgin -y up && \
