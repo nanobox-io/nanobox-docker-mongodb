@@ -38,6 +38,8 @@ When configuring a MongoDB service in your Boxfile, you can specify the version 
 
 - 2.6
 - 3.0
+- 3.2
+- 3.4
 
 **Note:** Due to version compatibility constraints, MongoDB versions cannot be changed after the service is created. To use a different version, you'll have to create a new MongoDB service and manually migrate data.
 
