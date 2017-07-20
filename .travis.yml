@@ -3,6 +3,8 @@ sudo: required
 env:
   - VERSION=2.6
   - VERSION=3.0
+  - VERSION=3.2
+  - VERSION=3.4
 
 services:
   - docker
