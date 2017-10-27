@@ -21,7 +21,8 @@ RUN rm -rf /data/var/db/pkgin && \
         luvit-0.10.0 \
         flip \
         flip-scripts \
-        mongodb-server-3.2 && \
+        mongodb-server-3.2 \
+        mongodb32-tools && \
     rm -rf /data/var/db/pkgin/cache
 
 USER root
