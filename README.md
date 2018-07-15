@@ -4,7 +4,7 @@ This is an MongoDB Docker image used to launch a MongoDB service on Nanobox. To 
 
 ```yaml
 data.db:
-  image: nanobox/mongodb
+  image: nanobox/mongodb:3.0
 ```
 
 ## MongoDB Configuration Options
@@ -22,9 +22,8 @@ MongoDB components are configured in your `boxfile.yml`. All available configura
 #### Overview of MongoDB Boxfile Settings
 ```yaml
 data.db:
-  image: nanobox/mongodb
+  image: nanobox/mongodb:3.0
   config:
-    version: 3.0
     objcheck: true
     log_verbosity: 'v'
     directoryperdb: true
@@ -47,9 +46,7 @@ When configuring a MongoDB service in your Boxfile, you can specify the version 
 ```yaml
 # default setting
 data.db:
-  image: nanobox/mongodb
-  config:
-    version: 3.0
+  image: nanobox/mongodb:3.0
 ```
 
 ### ObjCheck
